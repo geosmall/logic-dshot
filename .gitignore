@@ -1,6 +1,31 @@
+build/
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Claude Code / MCP
+.claude/
+.mcp.json
+
+# CMake (if run outside build/)
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+Analyzers/
+_deps/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Legacy Qbs output
 debug
 deploy
 release
 include
 lib
-

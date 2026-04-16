@@ -7,7 +7,7 @@
 #include <cstdio>
 
 DshotAnalyzer::DshotAnalyzer()
-:	Analyzer(),  
+:	Analyzer2(),
 	mSettings( new DshotAnalyzerSettings() ),
 	mSimulationInitilized( false )
 {
@@ -24,12 +24,15 @@ double DshotAnalyzer::proportionOfBit(U32 width)
 	return static_cast<double>(width) / mSamplesPerBit;
 }
 
-void DshotAnalyzer::WorkerThread()
+void DshotAnalyzer::SetupResults()
 {
 	mResults.reset( new DshotAnalyzerResults( this, mSettings.get() ) );
 	SetAnalyzerResults( mResults.get() );
 	mResults->AddChannelBubblesWillAppearOn( mSettings->mInputChannel );
+}
 
+void DshotAnalyzer::WorkerThread()
+{
 	mSampleRateHz = GetSampleRate();
 
 	mSerial = GetAnalyzerChannelData( mSettings->mInputChannel );

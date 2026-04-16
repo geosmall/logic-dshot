@@ -6,11 +6,12 @@
 #include "DshotSimulationDataGenerator.h"
 
 class DshotAnalyzerSettings;
-class ANALYZER_EXPORT DshotAnalyzer : public Analyzer
+class ANALYZER_EXPORT DshotAnalyzer : public Analyzer2
 {
 public:
 	DshotAnalyzer();
 	virtual ~DshotAnalyzer();
+	virtual void SetupResults();
 	virtual void WorkerThread();
 
 	virtual U32 GenerateSimulationData( U64 newest_sample_requested, U32 sample_rate, SimulationChannelDescriptor** simulation_channels );
@@ -20,8 +21,8 @@ public:
 	virtual bool NeedsRerun();
 
 protected: //vars
-	std::auto_ptr< DshotAnalyzerSettings > mSettings;
-	std::auto_ptr< DshotAnalyzerResults > mResults;
+	std::unique_ptr< DshotAnalyzerSettings > mSettings;
+	std::unique_ptr< DshotAnalyzerResults > mResults;
 	AnalyzerChannelData* mSerial;
 
 	DshotSimulationDataGenerator mSimulationDataGenerator;
