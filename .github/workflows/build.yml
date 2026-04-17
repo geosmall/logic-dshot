@@ -10,7 +10,7 @@ jobs:
   windows-x86_64:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Build
@@ -18,7 +18,7 @@ jobs:
           cmake -B ${{github.workspace}}/build -A x64
           cmake --build ${{github.workspace}}/build --config Release
       - name: Upload windows x86_64 build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: windows_x86_64
           path: ${{github.workspace}}/build/Analyzers/Release/*.dll
@@ -26,7 +26,7 @@ jobs:
   windows-arm64:
     runs-on: windows-11-arm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Build
@@ -34,7 +34,7 @@ jobs:
           cmake -B ${{github.workspace}}/build -A ARM64
           cmake --build ${{github.workspace}}/build --config Release
       - name: Upload windows arm64 build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: windows_arm64
           path: ${{github.workspace}}/build/Analyzers/Release/*.dll
@@ -42,7 +42,7 @@ jobs:
   macos:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Build
@@ -52,12 +52,12 @@ jobs:
           cmake -B ${{github.workspace}}/build/arm64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES=arm64
           cmake --build ${{github.workspace}}/build/arm64
       - name: Upload MacOS x86_64 build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: macos_x86_64
           path: ${{github.workspace}}/build/x86_64/Analyzers/*.so
       - name: Upload MacOS arm64 build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: macos_arm64
           path: ${{github.workspace}}/build/arm64/Analyzers/*.so
@@ -65,7 +65,7 @@ jobs:
   linux-x86_64:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Pull pre-built builder image
@@ -78,7 +78,7 @@ jobs:
             ghcr.io/saleae/analyzer-build-image:linux-x86_64 \
             bash -c 'cmake -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build'
       - name: Upload Linux x86_64 build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: linux_x86_64
           path: ${{github.workspace}}/build/Analyzers/*.so
@@ -86,7 +86,7 @@ jobs:
   linux-arm64:
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
       - name: Pull pre-built builder image
@@ -99,7 +99,7 @@ jobs:
             ghcr.io/saleae/analyzer-build-image:linux-arm64 \
             bash -c 'cmake -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build'
       - name: Upload Linux arm64 build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: linux_arm64
           path: ${{github.workspace}}/build/Analyzers/*.so
@@ -109,14 +109,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download individual builds
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: ${{github.workspace}}/artifacts
       - name: Zip
         run: |
           cd ${{github.workspace}}/artifacts
           zip -r ${{github.workspace}}/analyzer.zip .
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: all-platforms
           path: ${{github.workspace}}/artifacts/**
