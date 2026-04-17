@@ -107,6 +107,8 @@ jobs:
   publish:
     needs: [windows-x86_64, windows-arm64, macos, linux-x86_64, linux-arm64]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Download individual builds
         uses: actions/download-artifact@v8
