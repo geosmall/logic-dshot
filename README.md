@@ -29,6 +29,10 @@ Output: `build/Analyzers/libDshotAnalyzer.so` (Linux), `.dylib` (macOS), or `.dl
 
 Point Logic 2 at the `build/Analyzers/` directory following [Saleae's setup guide](https://www.saleae.com/support/extensions-api/protocol-analyzer-sdk/setting-up-developer-directory).
 
+## Pre-built Releases
+
+Pre-built binaries for Linux, macOS, and Windows (x86_64 and ARM64) are available on the [Releases](https://github.com/geosmall/logic-dshot/releases) page. Download `analyzer.zip` and point Logic 2 at the extracted directory for your platform.
+
 ## Dshot Protocol
 
 Each frame is 16 bits:
