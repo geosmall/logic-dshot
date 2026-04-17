@@ -4,7 +4,7 @@
 
 DshotAnalyzerSettings::DshotAnalyzerSettings()
 :	mInputChannel( UNDEFINED_CHANNEL ),
-	mDshotRate( 300 )
+	mDshotRate( 600 )
 {
 	mInputChannelInterface.reset( new AnalyzerSettingInterfaceChannel() );
 	mInputChannelInterface->SetTitleAndTooltip( "Serial", "Standard Dshot" );
